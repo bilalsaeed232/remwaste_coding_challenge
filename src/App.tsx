@@ -1,6 +1,5 @@
 // Main application component
 
-import React from 'react';
 import { Trash2, MapPin } from 'lucide-react';
 import { SkipList } from './components/SkipList';
 import { BookingModal } from './components/BookingModal';

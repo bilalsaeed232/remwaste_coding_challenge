@@ -1,80 +1,13 @@
 // Service for fetching and enriching skip data
 
 import { SkipApiResponse, EnrichedSkip, ApiResponse } from '../types/skip';
+import { MOCK_SKIP_DATA } from '../data/mockskips';
 
 // Environment-based configuration
 const IS_DEVELOPMENT = import.meta.env.DEV;
 
 // API endpoint for production
 const API_ENDPOINT = 'https://app.wewantwaste.co.uk/api/skips/by-location?postcode=LE10&area=Hinckley';
-
-// Mock data for development environment
-const MOCK_SKIP_DATA: SkipApiResponse[] = [
-  {
-    id: 1,
-    size: '2',
-    price_before_vat: 120,
-    vat: 24,
-    availability: true,
-    delivery_time: '2-3 days'
-  },
-  {
-    id: 2,
-    size: '4',
-    price_before_vat: 180,
-    vat: 36,
-    availability: true,
-    delivery_time: '1-2 days'
-  },
-  {
-    id: 3,
-    size: '6',
-    price_before_vat: 240,
-    vat: 48,
-    availability: true,
-    delivery_time: '2-3 days'
-  },
-  {
-    id: 4,
-    size: '8',
-    price_before_vat: 300,
-    vat: 60,
-    availability: false,
-    delivery_time: '3-4 days'
-  },
-  {
-    id: 5,
-    size: '12',
-    price_before_vat: 420,
-    vat: 84,
-    availability: true,
-    delivery_time: '1-2 days'
-  },
-  {
-    id: 6,
-    size: '16',
-    price_before_vat: 520,
-    vat: 104,
-    availability: true,
-    delivery_time: '2-3 days'
-  },
-  {
-    id: 7,
-    size: '20',
-    price_before_vat: 650,
-    vat: 130,
-    availability: true,
-    delivery_time: '3-4 days'
-  },
-  {
-    id: 8,
-    size: '40',
-    price_before_vat: 1200,
-    vat: 240,
-    availability: true,
-    delivery_time: '5-7 days'
-  }
-];
 
 /**
  * Fetches skip data from API or returns mock data in development
@@ -93,10 +26,19 @@ export const fetchSkips = async (): Promise<SkipApiResponse[]> => {
     }
     
     const data: ApiResponse = await response.json();
+    
+    // Safety check: ensure data.skips exists and is an array
+    if (!data || !Array.isArray(data.skips)) {
+      console.warn('API response does not contain valid skips array:', data);
+      return MOCK_SKIP_DATA; // Fallback to mock data
+    }
+    
     return data.skips;
   } catch (error) {
     console.error('Error fetching skips:', error);
-    throw error;
+    // Fallback to mock data instead of throwing error
+    console.log('Falling back to mock data');
+    return MOCK_SKIP_DATA;
   }
 };
 
