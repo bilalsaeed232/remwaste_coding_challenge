@@ -1,7 +1,7 @@
 // Service for fetching and enriching skip data
 
 import { SkipApiResponse, EnrichedSkip, ApiResponse } from '../types/skip';
-import { MOCK_SKIP_DATA } from '../data/mockskips';
+import { MOCK_SKIP_DATA } from '../data/mockSkips';
 
 // Environment-based configuration
 const IS_DEVELOPMENT = import.meta.env.DEV;
