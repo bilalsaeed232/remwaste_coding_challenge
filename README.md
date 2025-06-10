@@ -221,7 +221,7 @@ To test different cart scenarios:
 The application is ready for deployment to any static hosting service:
 
 - **Netlify**: Drag and drop the `dist` folder
-- **Vercel**: Connect GitHub repository for automatic deployments
+- **Vercel**: Connect GitHub repository for automatic deployments (*currently deployed here*)
 - **GitHub Pages**: Use the built files from `npm run build`
 
 ## 📊 Performance Considerations
