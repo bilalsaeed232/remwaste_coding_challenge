@@ -68,6 +68,8 @@ src/
 │   ├── BookingModal.tsx      # Multi-skip booking form
 │   ├── LoadingSpinner.tsx    # Loading state component
 │   └── ErrorMessage.tsx      # Error state with retry
+├── data/
+│   ├── mockSkips.ts          # Mock data in development
 ├── hooks/
 │   ├── useSkips.ts           # Custom hook for data fetching
 │   ├── useCart.ts            # Custom hook for cart management
